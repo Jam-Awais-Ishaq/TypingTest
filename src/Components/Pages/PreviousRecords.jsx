@@ -21,7 +21,6 @@ import {
 import { Delete, Visibility, TrendingUp } from "@mui/icons-material";
 import TestDetail from "../../Model/TestDetail";
 
-// ✅ YEH FUNCTION EXPORT KAREIN (file ke bahar)
 export const addNewRecord = (completionData) => {
     if (!completionData) return;
 
@@ -45,12 +44,10 @@ export const addNewRecord = (completionData) => {
     return updatedRecords;
 };
 
-// ✅ YEH COMPONENT DEFAULT EXPORT KAREIN
 export default function PreviousRecords() {
     const isMobile = useMediaQuery("(max-width:600px)");
     const isTablet = useMediaQuery("(max-width:900px)");
 
-    // ✅ SINGLE STATE MANAGEMENT
     const [state, setState] = useState({
         records: [],
         selectedRecord: null,
@@ -60,7 +57,6 @@ export default function PreviousRecords() {
 
     const { records, selectedRecord, deleteDialog, viewDialog } = state;
 
-    // ✅ Load records from localStorage
     useEffect(() => {
         const savedRecords = localStorage.getItem("typingTestRecords");
         if (savedRecords) {
@@ -68,12 +64,10 @@ export default function PreviousRecords() {
         }
     }, []);
 
-    // ✅ View record
     const handleViewRecord = (record) => {
         setState(prev => ({ ...prev, selectedRecord: record, viewDialog: true }));
     };
 
-    // ✅ Delete record
     const handleDeleteRecord = (record) => {
         setState(prev => ({
             ...prev,
@@ -82,7 +76,6 @@ export default function PreviousRecords() {
         }));
     };
 
-    // ✅ Confirm delete
     const handleConfirmDelete = () => {
         const updatedRecords = records.filter(r => r.id !== selectedRecord.id);
         setState(prev => ({
@@ -94,13 +87,11 @@ export default function PreviousRecords() {
         localStorage.setItem("typingTestRecords", JSON.stringify(updatedRecords));
     };
 
-    // ✅ Clear all records
     const handleClearAll = () => {
         setState(prev => ({ ...prev, records: [] }));
         localStorage.setItem("typingTestRecords", "[]");
     };
 
-    // ✅ Close dialogs
     const handleCloseDialog = () => {
         setState(prev => ({
             ...prev,
@@ -110,7 +101,6 @@ export default function PreviousRecords() {
         }));
     };
 
-    // ✅ Get performance rating
     const getPerformanceRating = (wpm, accuracy) => {
         if (wpm >= 40 && accuracy >= 95) return { label: "Excellent", color: "success" };
         if (wpm >= 30 && accuracy >= 90) return { label: "Good", color: "primary" };
@@ -118,7 +108,6 @@ export default function PreviousRecords() {
         return { label: "Beginner", color: "error" };
     };
 
-    // ✅ Format date for mobile
     const formatDate = (dateString) => {
         if (isMobile) {
             const date = new Date(dateString);
@@ -133,7 +122,7 @@ export default function PreviousRecords() {
             minHeight: '80vh',
             backgroundColor: 'background.default'
         }}>
-            {/* Header */}
+           
             <Box sx={{
                 display: "flex",
                 justifyContent: "space-between",
@@ -177,7 +166,6 @@ export default function PreviousRecords() {
                 </div>
             </Box>
 
-            {/* Records Table */}
             {records.length > 0 ? (
                 <TableContainer
                     component={Paper}
@@ -355,14 +343,12 @@ export default function PreviousRecords() {
                 </Paper>
             )}
 
-            {/* View Dialog */}
             <TestDetail
                 open={state.viewDialog}
                 selectedRecord={state.selectedRecord}
                 handleCloseDialog={handleCloseDialog}
             />
 
-            {/* Delete Confirmation Dialog */}
             <Dialog
                 open={deleteDialog}
                 onClose={handleCloseDialog}

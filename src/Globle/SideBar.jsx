@@ -107,7 +107,6 @@ export default function SideBar({ onLoginClick, onRefresh }) {
                         ))}
                     </List>
 
-                    {/* Login button (mobile only) */}
                     <Button
                         fullWidth
                         sx={{
@@ -127,7 +126,6 @@ export default function SideBar({ onLoginClick, onRefresh }) {
                 </Box>
             </Drawer>
 
-            {/* Permanent Sidebar for md+ screens */}
             <Box
                 sx={{
                     width: collapsed ? "90px" : "250px", // collapsed width
@@ -143,7 +141,6 @@ export default function SideBar({ onLoginClick, onRefresh }) {
                     overflow: "hidden",
                 }}
             >
-                {/* Toggle collapse/unfold button */}
                 <IconButton
                     onClick={() => setCollapsed(!collapsed)}
                     sx={{
@@ -163,7 +160,7 @@ export default function SideBar({ onLoginClick, onRefresh }) {
                         fontWeight: "bold",
                         textAlign: "center",
                         mt: 2,
-                        display: collapsed ? "none" : "block", // hide title when collapsed
+                        display: collapsed ? "none" : "block",
                     }}
                 >
                     Typing Tester
@@ -196,7 +193,7 @@ export default function SideBar({ onLoginClick, onRefresh }) {
                                         fontSize: "18px",
                                         fontFamily: "serif",
                                         fontWeight: 500,
-                                        display: collapsed ? "none" : "block", // hide text when collapsed
+                                        display: collapsed ? "none" : "block",
                                     }}
                                 />
 

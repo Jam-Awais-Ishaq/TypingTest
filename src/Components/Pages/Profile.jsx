@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 const Profile = () => {
     const [profile, setProfile] = useState({
         name: 'John Doe',
@@ -12,14 +11,10 @@ const Profile = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    // Edit profile ka function
-
-
     const handleEditProfile = () => {
         setIsEditing(true);
     };
 
-    // Input change handle karne ka function
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setProfile(prevProfile => ({
@@ -28,20 +23,18 @@ const Profile = () => {
         }));
     };
 
-    // Save Your profile Data
     const handleSaveProfile = () => {
         console.log('Profile saved:', profile);
         setIsEditing(false);
     };
 
-    // Cancel edit ka function
     const handleCancelEdit = () => {
         setIsEditing(false);
     };
 
     return (
         <div className=" p-3 mt-4">
-            {/* Header */}
+        
             <div className="flex justify-between items-center border-b border-gray-300 pb-4 mb-6">
                 <h2 className="text-2xl font-bold text-gray-800">My Profile</h2>
                 {!isEditing && (
@@ -54,12 +47,10 @@ const Profile = () => {
                 )}
             </div>
 
-            {/* Profile Content */}
             <div className="space-y-2">
                 {isEditing ? (
-                    // Edit Mode
                     <div className="space-y-2">
-                        {/* Name Field */}
+                    
                         <div className='md:flex justify-between gap-2'>
                             <div className='md:w-[50%]'>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -75,7 +66,6 @@ const Profile = () => {
                                 />
                             </div>
 
-                            {/* Email Field */}
                             <div className='md:w-[50%]'>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">
                                     Email Address
@@ -91,7 +81,6 @@ const Profile = () => {
                             </div>
                         </div>
 
-                        {/* Phone Field */}
                         <div className='md:flex gap-2 justify-between'>
                             <div className='md:w-[50%]'>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -107,7 +96,6 @@ const Profile = () => {
                                 />
                             </div>
 
-                            {/* Address Field */}
                             <div className='md:w-[50%]'>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">
                                     Address
@@ -122,8 +110,6 @@ const Profile = () => {
                                 />
                             </div>
                         </div>
-
-                        {/* Bio Field */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">
                                 Bio
@@ -138,7 +124,6 @@ const Profile = () => {
                             />
                         </div>
 
-                        {/* Action Buttons */}
                         <div className="flex gap-3 pt-4">
                             <button
                                 onClick={handleSaveProfile}
@@ -155,7 +140,6 @@ const Profile = () => {
                         </div>
                     </div>
                 ) : (
-                    // View Mode
                     <div className=" space-y-1 w-[100%] p-2">
                         <div className="flex items-center w-full">
                             <div className="w-17 h-17 bg-blue-500 mr-1 rounded-full flex items-center justify-center text-white text-2xl font-bold">
@@ -190,5 +174,4 @@ const Profile = () => {
         </div>
     );
 };
-
 export default Profile;

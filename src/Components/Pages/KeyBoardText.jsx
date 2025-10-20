@@ -42,8 +42,7 @@ export default function KeyBoardText({ selectedTime, isRunning, stopTimer, close
         startTime: null,
         wordsTyped: 0,
         currentWPM: 0,
-        // showCompletionModal: false,
-        // completionData: null
+       
       }));
       if (wpmIntervalRef.current) {
         clearInterval(wpmIntervalRef.current);
@@ -58,9 +57,7 @@ export default function KeyBoardText({ selectedTime, isRunning, stopTimer, close
         typingStarted: false,
         startTime: null,
         wordsTyped: 0,
-        currentWPM: 0,
-        // showCompletionModal: false,
-        // completionData: null
+        currentWPM: 0, 
       }));
       if (wpmIntervalRef.current) {
         clearInterval(wpmIntervalRef.current);
@@ -69,28 +66,23 @@ export default function KeyBoardText({ selectedTime, isRunning, stopTimer, close
     }
   }, [selectedTime, isRunning]);
 
-
-
-
-
   useEffect(() => {
-    // ✅ CASE 1: Paragraph Complete (User ne paragraph khatam kar diya)
     if (typingStarted && cursorIndex === paragraph.length && paragraph.length > 0) {
       const endTime = new Date().getTime();
-      const timeTakenInSeconds = (endTime - startTime) / 1000; // Actual typing time calculate
+      const timeTakenInSeconds = (endTime - startTime) / 1000;
       const timeTakenInMinutes = timeTakenInSeconds / 60;
       const totalWordsInParagraph = calculateWordCount(paragraph);
       const userWordsTyped = calculateWordCount(typedText);
       const wpm = calculateWPM(typedText, timeTakenInMinutes);
 
       const completionData = {
-        timeTaken: timeTakenInSeconds, // Actual time taken to complete paragraph
+        timeTaken: timeTakenInSeconds,
         wordsTyped: userWordsTyped,
         totalWordsInParagraph: totalWordsInParagraph,
         remainingWords: Math.max(0, totalWordsInParagraph - userWordsTyped),
         wpm: wpm,
         accuracy: calculateAccuracy(paragraph, typedText),
-        isTimeUp: false, // User ne paragraph complete kiya
+        isTimeUp: false, 
       };
 
       setTypingState(prev => ({
@@ -99,17 +91,15 @@ export default function KeyBoardText({ selectedTime, isRunning, stopTimer, close
         completionData: completionData
       }));
 
-      if (stopTimer) stopTimer(); // Timer stop karo
+      if (stopTimer) stopTimer();
       if (wpmIntervalRef.current) {
         clearInterval(wpmIntervalRef.current);
         wpmIntervalRef.current = null;
       }
     }
-
-    // ✅ CASE 2: Time Up (Timer khatam ho gaya, paragraph incomplete)
     else if (showTimeUpModal && typingStarted) {
       const endTime = new Date().getTime();
-      const actualTimeTakenInSeconds = (endTime - startTime) / 1000; // Actual typing time
+      const actualTimeTakenInSeconds = (endTime - startTime) / 1000; 
       const timeTakenInMinutes = actualTimeTakenInSeconds / 60;
 
       const totalWordsInParagraph = calculateWordCount(paragraph);
@@ -117,13 +107,13 @@ export default function KeyBoardText({ selectedTime, isRunning, stopTimer, close
       const wpm = calculateWPM(typedText, timeTakenInMinutes);
 
       const completionData = {
-        timeTaken: actualTimeTakenInSeconds, // Actual time user ne type kiya
+        timeTaken: actualTimeTakenInSeconds,
         wordsTyped: userWordsTyped,
         totalWordsInParagraph: totalWordsInParagraph,
         remainingWords: Math.max(0, totalWordsInParagraph - userWordsTyped),
         wpm: wpm,
         accuracy: calculateAccuracy(paragraph, typedText),
-        isTimeUp: true, // Time khatam ho gaya
+        isTimeUp: true, 
       };
 
       setTypingState(prev => ({
@@ -138,14 +128,13 @@ export default function KeyBoardText({ selectedTime, isRunning, stopTimer, close
       }
     }
   }, [
-    // Dependencies
-    cursorIndex,           // Track typing progress
-    paragraph,             // Paragraph content changes
-    typingStarted,         // Typing start status
-    startTime,             // When typing started
-    typedText,             // What user typed
-    stopTimer,             // Timer stop function
-    showTimeUpModal        // Time up signal from parent
+    cursorIndex,          
+    paragraph,            
+    typingStarted,         
+    startTime,             
+    typedText,            
+    stopTimer,             
+    showTimeUpModal       
   ]);
 
 
@@ -270,7 +259,6 @@ export default function KeyBoardText({ selectedTime, isRunning, stopTimer, close
   };
 
   const closeModal = () => {
-    // ✅ Directly save to localStorage
     if (completionData) {
       const savedRecords = localStorage.getItem("typingTestRecords") || "[]";
       const records = JSON.parse(savedRecords);
